@@ -4,7 +4,7 @@
 
 **Dữ liệu** là mức giá giao dịch theo ngày, thu thập từ năm 2017 đến năm 2024, được lấy nguồn từ Kaggle.
 
-**Biến mục tiêu**: **Giá đóng cửa** (Close) theo ngày.
+**Biến mục tiêu**: Giá đóng cửa (**Close**)
 
 **Thời gian dự báo**: 30 ngày, từ 30 - 11 - 2024 đến 29 - 12 - 2024
 
