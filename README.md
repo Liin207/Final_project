@@ -2,7 +2,9 @@
 
 Đồ án sử dụng ba mô hình: **ARIMA** (base model), **ARIMA - GARCH** và **LSTM** để dự báo giá cả trong tương lai của năm đồng tiền mã hoá lớn: **Bitcoin, Ethereum, Binance Coin, XRP** và **Dogecoin**.
 
-**Dữ liệu** là mức giá giao dịch theo ngày, thu thập từ 2017 đến 2024, được lấy nguồn từ Kaggle.
+**Thời gian dự báo**; 30 ngày, từ 30 - 11 - 2024 đến 29 - 12 - 2024
+
+**Dữ liệu** là mức giá giao dịch theo ngày, thu thập từ năm 2017 đến năm 2024, được lấy nguồn từ Kaggle.
 
 **Độ chính xác của mô hình** được đánh giá bằng chỉ số **MAPE**. Mô hình đạt yêu cầu là mô hình có giá trị MAPE nhỏ hơn hoặc bằng **2.34%**.
 Dựa trên kết quả đánh giá, mô hình có performance tốt nhất sẽ được lựa chọn để cải tiến nhằm tăng độ chính xác cho dự báo.
@@ -24,15 +26,18 @@ Dựa trên kết quả đánh giá, mô hình có performance tốt nhất sẽ
   - [Files đính kèm](#files-đính-kèm)
   - [Tài Liệu Tham Khảo](#tài-liệu-tham-khảo)
 
+## 
 
-## Lập Mô Hình
+## Xử Lý Dữ Liệu và Lập Mô Hình
 ### Mô hình ARIMA
+1. Xử lý dữ liệu
 - **Phân rã dữ liệu theo mùa:** Kết luận dữ liệu không có tính mùa vụ
 - **Kiểm định tính dừng** ADF test cho chuỗi thời gian:
   - XRP có tính dừng tại chuỗi thời gian gốc
   - Bitcoin, Ethereum, Binance Coin và Dogecoin có tính dừng tại sai phân bậc 1
 - Dữ liệu sau đó được **biến đổi logarit** và **tách làm dữ liệu huấn luyện - kiểm tra** với tỷ lệ 0.7/0.3
 - Bộ tham số **(p, d, q)** được lựa chọn dựa trên *ADF Test* và `auto_arima()`
+2. Lập Mô Hình
 ### Mô hình ARIMA - GARCH
 - Sử dụng bộ dữ liệu tương tự mô hình ARIMA ở trên
 - Bộ tham số **(p, d, q)** cho mô hình ARIMA được lựa chọn dựa trên *ADF Test* và `forecast.auto_arima()`
