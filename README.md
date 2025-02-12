@@ -2,7 +2,9 @@
 
 Đồ án sử dụng ba mô hình: **ARIMA** (base model), **ARIMA - GARCH** và **LSTM** để dự báo giá cả trong tương lai của năm đồng tiền mã hoá lớn: **Bitcoin, Ethereum, Binance Coin, XRP** và **Dogecoin**.
 
-**Thời gian dự báo**; 30 ngày, từ 30 - 11 - 2024 đến 29 - 12 - 2024
+**Biến mục tiêu**: Giá đóng cửa (Close) theo ngày
+
+**Thời gian dự báo**: 30 ngày, từ 30 - 11 - 2024 đến 29 - 12 - 2024
 
 **Dữ liệu** là mức giá giao dịch theo ngày, thu thập từ năm 2017 đến năm 2024, được lấy nguồn từ Kaggle.
 
@@ -25,57 +27,90 @@ Dựa trên kết quả đánh giá, mô hình có performance tốt nhất sẽ
   - [Kết Luận](#kết-luận)
   - [Files đính kèm](#files-đính-kèm)
   - [Tài Liệu Tham Khảo](#tài-liệu-tham-khảo)
-
-## 
-
-## Xử Lý Dữ Liệu và Lập Mô Hình
+## Chuẩn Bị Dữ Liệu và Lập Mô Hình
 ### Mô hình ARIMA
-1. Xử lý dữ liệu
-- **Phân rã dữ liệu theo mùa:** Kết luận dữ liệu không có tính mùa vụ
-- **Kiểm định tính dừng** ADF test cho chuỗi thời gian:
+
+**1. Chuẩn bị dữ liệu**
+
+**Phân rã dữ liệu theo mùa:** Kết luận dữ liệu không có tính mùa vụ
+
+**Kiểm định tính dừng ADF test**:
   - XRP có tính dừng tại chuỗi thời gian gốc
   - Bitcoin, Ethereum, Binance Coin và Dogecoin có tính dừng tại sai phân bậc 1
-- Dữ liệu sau đó được **biến đổi logarit** và **tách làm dữ liệu huấn luyện - kiểm tra** với tỷ lệ 0.7/0.3
+  
+**Biến đổi dữ liệu**: Biến đổi logarit
+
+**Tách bộ dữ liệu huấn luyện - kiểm tra**: Tỷ lệ training set/ testing set là 0.7/0.3
+
+**2. Lựa chọn bộ tham số tối ưu**
+
 - Bộ tham số **(p, d, q)** được lựa chọn dựa trên *ADF Test* và `auto_arima()`
-2. Lập Mô Hình
+
 ### Mô hình ARIMA - GARCH
-- Sử dụng bộ dữ liệu tương tự mô hình ARIMA ở trên
+
+**1. Chuẩn bị dữ liệu**
+
+Sử dụng bộ dữ liệu tương tự mô hình ARIMA ở trên
+
+**2. Lựa chọn bộ tham số tối ưu**
+
 - Bộ tham số **(p, d, q)** cho mô hình ARIMA được lựa chọn dựa trên *ADF Test* và `forecast.auto_arima()`
 - Bộ tham số **(p, q)** cho mô hình GARCH là *(1, 1)*
+
 ### Mô hình LSTM
-- Tiền xử lý dữ liệu
-  - Dữ liệu được chuyển về dạng Sliding Window với window là giá đóng cửa tại 15 ngày trước đó
-  - Dữ liệu được biến đổi áp dụng hàm MinMaxScaler(), riêng với Dogecoin thực hiện thêm bước logarit
-  - Tách bộ dữ liệu huấn luyện - kiểm tra với tỷ lệ 0.7/ 0.3
-- Cấu trúc mô hình
+
+**1. Chuẩn bị dữ liệu**
+
+- Chuyển dữ liệu về dạng *Sliding Window* với window là giá đóng cửa tại 15 ngày trước đó
+
+- Chuẩn hóa dữ liệu sử dụng hàm `MinMaxScaler()`. Riêng với Dogecoin thực hiện thêm bước logarit
+
+**Tách bộ dữ liệu huấn luyện - kiểm tra**: Tỷ lệ training set/ testing set là 0.7/0.3
+
+**2. Cấu Trúc Mô Hình**
+
 <p align="center">
   <img src="https://github.com/baruch1192/-Bitcoin-Price-Prediction-Using-Transformers/blob/main/images/Model_Structure.png" width="450"/>
 </p>
 
 ### Đánh Giá Kết Quả
-Sau khi thực hiện đánh giá mô hình trên bộ dữ liệu kiểm tra với các step = 15, 30, 120 và trên toàn bộ bộ dữ liệu, kết quả mô hình như sau:
+
+Thực hiện đánh giá mô hình trên bộ dữ liệu kiểm tra với step = 15, 30, 120 và trên toàn bộ bộ dữ liệu. Kết quả mô hình như sau:
+
 <p align="center">
   <img src="https://github.com/baruch1192/-Bitcoin-Price-Prediction-Using-Transformers/blob/main/images/Model_Structure.png" width="450"/>
 </p>
 
 Mô hình được lựa chọn để cải tiến là mô hình LSTM.
-## Cải Thiện Mô Hình
-### Tiền xử lý dữ liệu
+
+## Cải Tiến Mô Hình
+
+### Chuẩn bị dữ liệu
+
 Bổ sung 6 feature: **SMA60, SMA120, SMA220, Bollinger_Upper, Bollinger_Lower, Return**
+
 ### Cấu trúc mô hình
+
 <p align="center">
   <img src="https://github.com/baruch1192/-Bitcoin-Price-Prediction-Using-Transformers/blob/main/images/Model_Structure.png" width="450"/>
 </p>
 
 ### Kết quả
+
   - Giá trị MAPE tại tất cả các chuỗi thời gian đều được cải thiện đáng kể
+  - 
   - Giá trị MAPE trên chuỗi dữ liệu Bitcoin tại horizon = 30 là **1.34% < 2.34%**, đạt yêu cầu đề ra
+
 ## Dự báo
-Sử dụng mô hình kết hợp **GRU - LSTM** để dự báo giá của 5 đồng tiền số trong 30 ngày tiếp theo:
+
+Sử dụng mô hình kết hợp **GRU - LSTM** để dự báo giá của 5 đồng tiền số trong 30 ngày tiếp theo.
 
 ## Kết Luận
+
 Đồ án đã chỉ ra rằng sự kết hợp của mô hình GRU - LSTM đã đem lại độ chính xác của dự báo cao nhất.
+
 Hướng nghiên cứu trong tương lai:
+
 ## Files đính kèm
 
 | Folder |File name         | Purpose |
