@@ -2,11 +2,11 @@
 
 Đồ án sử dụng ba mô hình: **ARIMA** (base model), **ARIMA - GARCH** và **LSTM** để dự báo giá cả trong tương lai của năm đồng tiền mã hoá lớn: **Bitcoin, Ethereum, Binance Coin, XRP** và **Dogecoin**.
 
-**Biến mục tiêu**: Giá đóng cửa (Close) theo ngày
+**Dữ liệu** là mức giá giao dịch theo ngày, thu thập từ năm 2017 đến năm 2024, được lấy nguồn từ Kaggle.
+
+**Biến mục tiêu**: **Giá đóng cửa** (Close) theo ngày.
 
 **Thời gian dự báo**: 30 ngày, từ 30 - 11 - 2024 đến 29 - 12 - 2024
-
-**Dữ liệu** là mức giá giao dịch theo ngày, thu thập từ năm 2017 đến năm 2024, được lấy nguồn từ Kaggle.
 
 **Độ chính xác của mô hình** được đánh giá bằng chỉ số **MAPE**. Mô hình đạt yêu cầu là mô hình có giá trị MAPE nhỏ hơn hoặc bằng **2.34%**.
 Dựa trên kết quả đánh giá, mô hình có performance tốt nhất sẽ được lựa chọn để cải tiến nhằm tăng độ chính xác cho dự báo.
