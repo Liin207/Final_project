@@ -32,15 +32,15 @@ Dựa trên kết quả đánh giá, mô hình có performance tốt nhất sẽ
 
 **1. Chuẩn bị dữ liệu**
 
-**Phân rã dữ liệu theo mùa:** Kết luận dữ liệu không có tính mùa vụ
+- **Phân rã dữ liệu theo mùa:** Kết luận dữ liệu không có tính mùa vụ
 
-**Kiểm định tính dừng ADF test**:
+- **Kiểm định tính dừng ADF test**:
   - XRP có tính dừng tại chuỗi thời gian gốc
   - Bitcoin, Ethereum, Binance Coin và Dogecoin có tính dừng tại sai phân bậc 1
   
-**Biến đổi dữ liệu**: Biến đổi logarit
+- **Biến đổi dữ liệu**: Biến đổi logarit
 
-**Tách bộ dữ liệu huấn luyện - kiểm tra**: Tỷ lệ training set/ testing set là 0.7/0.3
+- **Tách bộ dữ liệu huấn luyện - kiểm tra**: Tỷ lệ training set/ testing set là 0.7/0.3
 
 **2. Lựa chọn bộ tham số tối ưu**
 
@@ -61,11 +61,11 @@ Sử dụng bộ dữ liệu tương tự mô hình ARIMA ở trên
 
 **1. Chuẩn bị dữ liệu**
 
-- Chuyển dữ liệu về dạng *Sliding Window* với window là giá đóng cửa tại 15 ngày trước đó
+- **Chuyển dữ liệu về dạng *Sliding Window*** với window là giá đóng cửa tại 15 ngày trước đó
 
-- Chuẩn hóa dữ liệu sử dụng hàm `MinMaxScaler()`. Riêng với Dogecoin thực hiện thêm bước logarit
+- **Chuẩn hóa dữ liệu** sử dụng hàm `MinMaxScaler()`. Riêng với Dogecoin thực hiện thêm bước logarit
 
-**Tách bộ dữ liệu huấn luyện - kiểm tra**: Tỷ lệ training set/ testing set là 0.7/0.3
+- **Tách bộ dữ liệu huấn luyện - kiểm tra**: Tỷ lệ training set/ testing set là 0.7/0.3
 
 **2. Cấu Trúc Mô Hình**
 
